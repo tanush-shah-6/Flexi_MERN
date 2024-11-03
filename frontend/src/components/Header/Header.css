@@ -1,0 +1,53 @@
+/* src/components/Header.css */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background: #f0f2ff;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #5a4fff;
+}
+
+.nav a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: #333;
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.shortcut {
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-left: 0.5rem;
+}
+
+.get-started {
+    background: #f542d7;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+    }
+}
