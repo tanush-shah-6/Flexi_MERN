@@ -1,19 +1,29 @@
 // src/App.js
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Hero from './components/Home/Hero';
-import Footer from './components/Footer/Footer';
 import FeatureSection from './components/Home/Features';
-
+import Footer from './components/Footer/Footer';
+import Tools from './pages/Tools'; // Import the Tools page
 
 const App = () => {
     return (
-        <div className="App">
-            <Header />
-            <Hero />
-            <FeatureSection />
-            <Footer />
-        </div>
+        <Router>
+            <div className="App">
+                <Header />
+                <Routes>
+                    <Route path="/" element={
+                        <>
+                            <Hero />
+                            <FeatureSection />
+                        </>
+                    } />
+                    <Route path="/tools" element={<Tools />} /> {/* Route for the Tools page */}
+                </Routes>
+                <Footer />
+            </div>
+        </Router>
     );
 };
 

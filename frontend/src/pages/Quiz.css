@@ -1,0 +1,121 @@
+.quiz {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9ff;
+    text-align: center;
+}
+
+.quiz h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.option-button {
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+    color: #fff;
+}
+
+.option-button:hover {
+    transform: scale(1.05);
+}
+
+.option-button.correct {
+    background-color: #28a745;
+}
+
+.option-button.incorrect {
+    background-color: #dc3545;
+}
+
+.option-button:not(.correct):not(.incorrect) {
+    background-color: #007bff;
+}
+
+.feedback {
+    margin: 20px 0;
+    font-size: 1.1rem;
+}
+
+.correct-text {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.incorrect-text {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.next-button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.next-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.quiz-end {
+    text-align: center;
+}
+
+.quiz-end h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.quiz-end p {
+    font-size: 1.2rem;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.restart-button {
+    background-color: #ff6f61;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.restart-button:hover {
+    background-color: #ff4c4c;
+    transform: scale(1.05);
+}
