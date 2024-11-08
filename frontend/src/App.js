@@ -6,6 +6,7 @@ import Hero from './components/Home/Hero';
 import FeatureSection from './components/Home/Features';
 import Footer from './components/Footer/Footer';
 import Tools from './pages/Tools'; // Import the Tools page
+import 'font-awesome/css/font-awesome.min.css';
 
 const App = () => {
     return (

@@ -45,9 +45,17 @@ h1 {
     background-color: #28a745;
 }
 
+.tab-buttons button.study-material-btn {
+    background-color: #007bff;
+}
+
 .tab-buttons button:hover {
     background-color: #0056b3;
     transform: scale(1.05);
+}
+
+.tab-buttons button.active {
+    background-color: #28a745; /* Green for active tab */
 }
 
 .tab-content {
@@ -56,16 +64,16 @@ h1 {
 }
 
 /* Flashcards Styles */
-.flashcard {
+/* .flashcard {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 25px;
     border: 1px solid #ddd;
     border-radius: 15px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
     background-color: #fff8e1;
     font-size: 18px;
-}
+} */
 
 .flashcard p {
     margin-bottom: 20px;
@@ -100,7 +108,7 @@ h1 {
 /* Quiz Styles */
 .quiz {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 25px;
     border: 1px solid #ddd;
     border-radius: 15px;
@@ -147,7 +155,7 @@ h1 {
 /* FAQ Styles */
 .faq {
     max-width: 600px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 25px;
     border: 1px solid #ddd;
     border-radius: 15px;
@@ -178,4 +186,40 @@ h1 {
     background-color: #f9f9f9;
     padding: 10px;
     border-radius: 5px;
+}
+
+/* Study Material Section */
+.study-material {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #f0f8ff;
+    font-size: 18px;
+}
+
+.study-material h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.study-material ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.study-material ul li {
+    margin-bottom: 10px;
+}
+
+.study-material ul li a {
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.study-material ul li a:hover {
+    text-decoration: underline;
 }

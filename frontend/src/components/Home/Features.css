@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: center;
     padding: 50px 20px;
-    background-color: #f9f5ff;
+    background-color: #000000;
     gap: 20px;
   }
   
@@ -37,7 +37,7 @@
   }
   
   .feature-details p {
-    color: #6a6a6a;
+    color: #ffffff;
     margin-bottom: 20px;
   }
   

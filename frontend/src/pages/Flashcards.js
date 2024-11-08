@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Flashcards.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 const flashcardData = [
     { question: "What is the capital of France?", answer: "Paris" },
@@ -17,27 +18,19 @@ const flashcardData = [
 const Flashcards = () => {
     const [currentCard, setCurrentCard] = useState(0);
     const [flipped, setFlipped] = useState(false);
-    const [isAnimating, setIsAnimating] = useState(false);
-
-    const flipCard = () => {
-        if (isAnimating) return; // Prevent flipping while animating
-        setIsAnimating(true);
-        setFlipped(!flipped);
-        setTimeout(() => {
-            setIsAnimating(false); // Re-enable after animation
-        }, 600); // Match this duration with your CSS transition time
-    };
 
     const nextCard = () => {
-        if (isAnimating) return; // Prevent card transition while animating
         setFlipped(false);
         setCurrentCard((prevCard) => (prevCard + 1) % flashcardData.length);
     };
 
     const prevCard = () => {
-        if (isAnimating) return; // Prevent card transition while animating
         setFlipped(false);
         setCurrentCard((prevCard) => (prevCard - 1 + flashcardData.length) % flashcardData.length);
+    };
+
+    const flipCard = () => {
+        setFlipped(!flipped);
     };
 
     return (
@@ -45,22 +38,29 @@ const Flashcards = () => {
             <div className={`flashcard ${flipped ? "flipped" : ""}`} onClick={flipCard}>
                 <div className="flashcard-front">
                     <p className="flashcard-text">{flashcardData[currentCard].question}</p>
-                    <p className="flip-tip">Click to flip</p>
                 </div>
                 <div className="flashcard-back">
                     <p className="flashcard-text">{flashcardData[currentCard].answer}</p>
-                    <p className="flip-tip">Click to flip back</p>
                 </div>
             </div>
+            <p className="flip-tip">Click to flip</p>
             <div className="flashcard-controls">
-                <button className="control-button" onClick={prevCard} title="Previous">
-                    <i className="fas fa-arrow-left"></i>
+                <button
+                    className="control-button control-button-left"
+                    onClick={prevCard}
+                    title="Previous"
+                >
+                    <i className="fas fa-arrow-left"></i> {/* Font Awesome left arrow */}
                 </button>
                 <span className="progress">
                     Card {currentCard + 1} of {flashcardData.length}
                 </span>
-                <button className="control-button" onClick={nextCard} title="Next">
-                    <i className="fas fa-arrow-right"></i>
+                <button
+                    className="control-button control-button-right"
+                    onClick={nextCard}
+                    title="Next"
+                >
+                    <i className="fas fa-arrow-right"></i> {/* Font Awesome right arrow */}
                 </button>
             </div>
         </div>

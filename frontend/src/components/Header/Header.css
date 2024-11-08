@@ -4,7 +4,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background: #fff0f0;
+    background: #000000;
 }
 
 .logo {
@@ -16,7 +16,7 @@
 .nav a {
     margin: 0 1rem;
     text-decoration: none;
-    color: #333;
+    color: #d6d6d6;
 }
 
 .search-bar {
@@ -33,7 +33,7 @@
 
 .shortcut {
     font-size: 0.8rem;
-    color: #aaa;
+    color: #ffffff;
     margin-left: 0.5rem;
 }
 
