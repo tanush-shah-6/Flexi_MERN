@@ -3,6 +3,11 @@
     text-align: center;
     padding: 2rem;
     background: linear-gradient(145deg, #000000, #000000);
+
+    background-image: url('/public/images/bg_hero.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 90vh;
 }
 
 .hero-section h1 {
@@ -39,10 +44,11 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
+    font-size: 0.8em !important;
 }
 
 .trusted-info {
-    font-size: 0.9rem;
+    font-size: 1.5rem !important;
     color: #888;
     margin-top: 1.5rem;
 }

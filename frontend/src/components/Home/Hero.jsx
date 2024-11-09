@@ -4,6 +4,7 @@ import './Hero.css';
 
 const HeroSection = () => {
     return (
+        // <img src="/public/images/bg_hero.jpg" alt="" />
         <section className="hero-section">
             <h1>Your AI Study Assistant</h1>
             <p>Get study solutions for all subjects, flashcards, and more with StudySpark AI.</p>

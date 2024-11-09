@@ -25,13 +25,13 @@ const Header = () => {
                     </>
                 
             </nav>
-            <div className="auth-buttons">
+            <div className="auth-buttons ">
                 {isAuthenticated ? (
                     <button onClick={handleLogout}>Logout</button>
                 ) : (
                     <>
-                        <Link to="/login">Login</Link>
-                        <Link to="/register">Sign Up</Link>
+                        <Link to="/login" className='login-link'>Login</Link>
+                        <Link to="/register" className='signup-link'>Sign Up</Link>
                     </>
                 )}
             </div>
