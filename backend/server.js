@@ -3,10 +3,20 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
-const User = require('./models/User'); // Define the User model
+const http = require('http');
+const { Server } = require('socket.io');
+const User = require('./models/User'); // User model for login/registration
+const StudyRoom = require('./models/StudyRoom'); // Define a StudyRoom model
+const studyRoomSocket = require('./sockets/studyRoomSocket');
+const studyRoomRoutes = require('./routes/studyRoomRoutes');
 
 require('dotenv').config();
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
+    cors: { origin: '*' },
+});
+
 app.use(cors());
 app.use(express.json());
 
@@ -39,24 +49,12 @@ app.post('/login', async (req, res) => {
     res.json({ token });
 });
 
-// Middleware to protect routes
-const authMiddleware = (req, res, next) => {
-    const token = req.headers.authorization?.split(" ")[1];
-    if (!token) return res.status(403).json({ error: "Access denied" });
 
-    try {
-        const verified = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = verified;
-        next();
-    } catch {
-        res.status(403).json({ error: "Invalid token" });
-    }
-};
 
-// Protected route example (replace with your actual routes)
-app.get('/protected', authMiddleware, (req, res) => {
-    res.json({ message: "This is a protected route" });
-});
+app.use('/api/studyrooms', studyRoomRoutes);
+
+// Socket.io Chat in Study Rooms
+studyRoomSocket(io);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
