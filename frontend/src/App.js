@@ -20,7 +20,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<><Hero /><FeatureSection /></>} />
                     <Route path="/tools" element={isAuthenticated ? <Tools /> : <Navigate to="/login" />} />
-                    <Route path="#subjects" element={isAuthenticated ? <Subjects /> : <Navigate to="/login" />} />
+                    <Route path="/subjects" element={isAuthenticated ? <Subjects /> : <Navigate to="/login" />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                 </Routes>
