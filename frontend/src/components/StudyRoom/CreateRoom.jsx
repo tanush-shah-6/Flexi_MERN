@@ -1,38 +1,46 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './CreateRoom.css';  // If you want to style the form
+import './CreateRoom.css';
 
 const CreateRoom = () => {
   const [roomName, setRoomName] = useState('');
-  const [topic, setTopic] = useState('');  // Add a state to capture the topic
+  const [topic, setTopic] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
-  // Handle room creation
   const handleCreateRoom = async (e) => {
     e.preventDefault();
-    
-    const token = localStorage.getItem('token');  // Retrieve the token from localStorage
-    
+
+    const token = localStorage.getItem('token');
+
     if (!token) {
       alert("You need to be logged in to create a room.");
       return;
     }
 
     try {
-      // Send a POST request to create the room with the Authorization header
       const response = await axios.post(
         'http://localhost:5000/api/studyrooms/create',
         { name: roomName, topic: topic },
         {
           headers: {
-            Authorization: `Bearer ${token}`,  // Attach token in the headers
+            Authorization: `Bearer ${token}`,
           },
         }
       );
+
+      setSuccessMessage("Room created successfully! Redirecting...");
       
-      // Redirect to the study room chat page after successful room creation
-      navigate(`/study-room/${response.data._id}`);
+      // Clear the input fields
+      setRoomName('');
+      setTopic('');
+
+      // Redirect to the RoomList after a short delay
+      setTimeout(() => {
+        navigate('/room-list');  // Replace '/room-list' with the correct route
+      }, 1500); // 1.5 seconds delay
+
     } catch (err) {
       console.error('Error creating room:', err);
       alert('Error creating the room');
@@ -67,6 +75,9 @@ const CreateRoom = () => {
         </div>
 
         <button type="submit">Create Room</button>
+
+        {/* Display success message */}
+        {successMessage && <p className="success-message">{successMessage}</p>}
       </form>
     </div>
   );

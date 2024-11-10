@@ -27,7 +27,7 @@ const Header = () => {
             </nav>
             <div className="auth-buttons ">
                 {isAuthenticated ? (
-                    <button onClick={handleLogout}>Logout</button>
+                    <button onClick={handleLogout} className='logout-link'>Logout</button>
                 ) : (
                     <>
                         <Link to="/login" className='login-link'>Login</Link>

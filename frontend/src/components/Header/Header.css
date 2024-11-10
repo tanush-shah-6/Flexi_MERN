@@ -26,7 +26,8 @@
 }
 
 .login-link,
-.signup-link {
+.signup-link,
+.logout-link {
     /* color: #ffffff; */
     text-decoration: none;
     padding: 0.4rem 0.9rem;
@@ -42,6 +43,15 @@
     background-color: #386FA4;
     color: white;
     margin-right: 10px;
+}
+
+.logout-link {
+    background-color: red;
+    color: white;
+    margin-right: 10px;
+}
+.logout-link:hover {
+    background-color: darkred;
 }
 
 .signup-link {

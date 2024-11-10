@@ -2,9 +2,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './JoinRoom.css';
 
 const JoinRoom = () => {
   const [roomId, setRoomId] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const navigate = useNavigate();
 
   const handleJoinRoom = async (e) => {
@@ -28,7 +30,15 @@ const JoinRoom = () => {
           },
         }
       );
-      navigate(`/study-room/${roomId}`);
+
+      // Set success message
+      setSuccessMessage('Successfully joined the room!');
+      
+      // Delay redirection to allow the user to see the success message
+      setTimeout(() => {
+        navigate('/study-rooms');  // Redirect to the study rooms list
+        window.location.reload();   // Refresh the page
+      }, 1500); // 1.5-second delay
     } catch (err) {
       console.error('Error joining room:', err);
     }
@@ -37,6 +47,7 @@ const JoinRoom = () => {
   return (
     <div className="join-room-form">
       <h2>Join Study Room</h2>
+      {successMessage && <p className="success-message">{successMessage}</p>}
       <form onSubmit={handleJoinRoom}>
         <input
           type="text"
