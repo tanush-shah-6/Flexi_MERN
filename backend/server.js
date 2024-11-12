@@ -10,7 +10,6 @@ const StudyRoom = require('./models/StudyRoom');
 const Flashcard = require('./models/Flashcard');
 const QuizQuestion = require('./models/Quiz');
 const studyRoomSocket = require('./sockets/studyRoomSocket');
-const studyRoomRoutes = require('./routes/studyRoomRoutes');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 require('dotenv').config();
 
@@ -19,6 +18,9 @@ const server = http.createServer(app);
 const io = new Server(server, {
     cors: { origin: '*' },
 });
+
+// Route for study rooms, initialized with the `io` instance
+const studyRoomRoutes = require('./routes/studyRoomRoutes')(io);
 
 app.use(cors());
 app.use(express.json());

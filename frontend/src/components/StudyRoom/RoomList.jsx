@@ -26,7 +26,7 @@ const RoomList = () => {
   }, [token]);
 
   const handleGoToChatRoom = (roomId) => {
-    navigate(`/study-room/${roomId}`);
+    navigate(`/chat-room/${roomId}`);
   };
 
   return (
