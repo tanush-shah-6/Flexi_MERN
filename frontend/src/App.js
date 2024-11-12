@@ -11,6 +11,7 @@ import Subjects from './pages/Subjects';
 import StudyRoom from './pages/StudyRoom';
 import 'font-awesome/css/font-awesome.min.css';
 import ChatRoom from './components/StudyRoom/ChatRoom';
+import RoomList from './components/StudyRoom/RoomList';
 import './App.css';
 
 const App = () => {
@@ -39,6 +40,7 @@ const App = () => {
                     <Route path="/login" element={<Login onLogin={handleLogin} />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/chat-room/:roomId" element={<ChatRoom />} />
+                    <Route path="/room-list/:roomId" element={<RoomList />} />
                 </Routes>
                 <Footer />
             </div>

@@ -4,7 +4,7 @@ import RoomList from '../components/StudyRoom/RoomList';
 import JoinRoom from '../components/StudyRoom/JoinRoom';
 import StudyRoomChat from '../components/StudyRoom/StudyRoomChat';
 import { useNavigate } from 'react-router-dom';
-import './Tools.css';
+import './StudyRoom.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 const StudyRoom = () => {
