@@ -1,20 +1,27 @@
-// src/components/Home.js
 import React from 'react';
 import './Hero.css';
+import { useNavigate } from 'react-router-dom';
 
-const HeroSection = () => {
-    return (
-        // <img src="/public/images/bg_hero.jpg" alt="" />
-        <section className="hero-section">
-            <h1>Your AI Study Assistant</h1>
-            <p>Get study solutions for all subjects, flashcards, and more with StudySpark AI.</p>
-            <div className="question-box">
-                <textarea placeholder="Ask anything..."></textarea>
-                <button className="get-answer">Get Answer</button>
-            </div>
-            <p className="trusted-info">Trusted by students worldwide</p>
-        </section>
-    );
+const Hero = () => {
+  const navigate = useNavigate();
+
+  const handleRegister = () => {
+    navigate('/register'); 
+  };
+
+  return (
+    <section className="hero">
+      <div className="hero-content">
+        <h1>Study smarter with StudySpark AI!</h1>
+        <h2>Get instant answers, flashcards, quizzes, and join study rooms to connect with learners worldwide.</h2>
+        
+          <span>100% free!</span>
+            
+        <button className="cta-button" onClick={handleRegister}>Start Studying</button>
+        
+      </div>
+    </section>
+  );
 };
 
-export default HeroSection;
+export default Hero;

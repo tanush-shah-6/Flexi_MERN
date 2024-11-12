@@ -4,19 +4,18 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background: #E2DBBE;
+    background: black
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #230007;
+    width: 15%;
+    /* height: 40%; */
 }
 
 .nav a {
     margin: 0 1rem;
     text-decoration: none;
-    color: #13293D;
+    color: white
 }
 
 /* Login and Signup link styling */
