@@ -34,7 +34,7 @@ const App = () => {
                     <Route path="/" element={<><Hero /><FeatureSection /></>} />
                     <Route path="/tools" element={isAuthenticated ? <Tools /> : <Navigate to="/login" />} />
                     <Route path="/subjects" element={isAuthenticated ? <Subjects /> : <Navigate to="/login" />} />
-                    <Route path="/study-rooms" element={isAuthenticated ? <StudyRoom /> : <Navigate to="/login" />} />
+                    <Route path="/studyrooms" element={isAuthenticated ? <StudyRoom /> : <Navigate to="/login" />} />
                     <Route path="/login" element={<Login onLogin={handleLogin} />} />
                     <Route path="/register" element={<Register />} />
                 </Routes>

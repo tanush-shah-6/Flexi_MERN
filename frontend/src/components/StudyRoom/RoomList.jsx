@@ -1,60 +1,54 @@
+// src/components/StudyRoom/RoomList.jsx
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './RoomList.css';
 
 const RoomList = () => {
-  const [rooms, setRooms] = useState([]);
-  const navigate = useNavigate(); // Initialize navigate function
+  const [joinedRooms, setJoinedRooms] = useState([]);
+  const navigate = useNavigate();
+  const token = localStorage.getItem('token'); // Get the user token
 
   useEffect(() => {
-    const fetchRooms = async () => {
+    const fetchJoinedRooms = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/studyrooms');
-        setRooms(response.data);
+        const response = await axios.get('http://localhost:5000/api/studyrooms/joined', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setJoinedRooms(response.data);
       } catch (err) {
-        console.error('Error fetching rooms:', err);
+        console.error('Error fetching joined rooms:', err);
       }
     };
-    fetchRooms();
-  }, []);
+    fetchJoinedRooms();
+  }, [token]);
 
-  // Function to handle button click and navigate to the chat room
-  const handleJoinRoom = async (roomId) => {
-    try {
-      // Call the API to join the room
-      const response = await axios.post(
-        `http://localhost:5000/api/studyrooms/${roomId}/join`
-      );
-      
-      // On successful join, navigate to the study room chat page
-      if (response.status === 200) {
-        navigate(`/study-room/${roomId}`);
-      }
-    } catch (err) {
-      console.error('Error joining the room:', err);
-    }
+  const handleGoToChatRoom = (roomId) => {
+    navigate(`/study-room/${roomId}`);
   };
 
   return (
     <div className="room-list">
-      <h2>Study Rooms</h2>
-      <div className="room-cards">
-        {rooms.map((room) => (
-          <div key={room._id} className="room-card">
-            <h3>{room.name}</h3>
-            <p><strong>Topic:</strong> {room.topic}</p>
-            <p><strong>Room ID:</strong> {room._id}</p>
-            {/* Button to join the room */}
-            <button onClick={() => handleJoinRoom(room._id)} className="join-button">
-              Join Room
-            </button>
-          </div>
-        ))}
-      </div>
+      <h2>Your Joined Study Rooms</h2>
+      {joinedRooms.length === 0 ? (
+        <p>No joined rooms available. Join a room to start collaborating!</p>
+      ) : (
+        <div className="room-cards">
+          {joinedRooms.map((room) => (
+            <div key={room._id} className="room-card">
+              <h3>{room.name}</h3>
+              <p><strong>Topic:</strong> {room.topic}</p>
+              <button onClick={() => handleGoToChatRoom(room._id)} className="chat-button">
+                Go to Chat Room
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
 export default RoomList;
-  

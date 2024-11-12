@@ -1,64 +1,70 @@
-// src/components/StudyRoom/JoinRoom.jsx
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import './JoinRoom.css';
 
 const JoinRoom = () => {
-  const [roomId, setRoomId] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const navigate = useNavigate();
+    const [rooms, setRooms] = useState([]);
+    const [loading, setLoading] = useState(true); // To handle loading state
+    const [error, setError] = useState('');
 
-  const handleJoinRoom = async (e) => {
-    e.preventDefault();
+    useEffect(() => {
+        const fetchRooms = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/studyrooms/available', {
+                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                });
+                setRooms(response.data || []); // Safely handle the response data
+            } catch (error) {
+                setError('Error fetching rooms');
+                console.error('Error fetching rooms:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    // Get the token from localStorage or sessionStorage
-    const token = localStorage.getItem('token');
-    if (!token) {
-      console.error('No authentication token found');
-      return;
-    }
+        fetchRooms();
+    }, []);
 
-    try {
-      // Send the roomId in the URL, with token in headers
-      await axios.post(
-        `http://localhost:5000/api/studyrooms/${roomId}/join`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+    const handleJoinRoom = async (roomId) => {
+        try {
+            const response = await axios.post(`http://localhost:5000/api/studyrooms/${roomId}/join`, {}, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
+            alert('Successfully joined the room');
+        } catch (error) {
+            console.error('Error joining room:', error);
+            alert('Failed to join the room');
         }
-      );
+    };
 
-      // Set success message
-      setSuccessMessage('Successfully joined the room!');
-      
-      // Delay redirection to allow the user to see the success message
-      setTimeout(() => {
-        navigate('/study-rooms');  // Redirect to the study rooms list
-        window.location.reload();   // Refresh the page
-      }, 1500); // 1.5-second delay
-    } catch (err) {
-      console.error('Error joining room:', err);
+    if (loading) {
+        return <div>Loading rooms...</div>;
     }
-  };
 
-  return (
-    <div className="join-room-form">
-      <h2>Join Study Room</h2>
-      {successMessage && <p className="success-message">{successMessage}</p>}
-      <form onSubmit={handleJoinRoom}>
-        <input
-          type="text"
-          placeholder="Room ID"
-          value={roomId}
-          onChange={(e) => setRoomId(e.target.value)}
-        />
-        <button type="submit">Join Room</button>
-      </form>
-    </div>
-  );
+    if (error) {
+        return <div>{error}</div>;
+    }
+
+    return (
+        <div>
+            <h2>Join a Study Room</h2>
+            <div>
+                {rooms && rooms.length === 0 ? (
+                    <p>No available rooms to join.</p>
+                ) : (
+                    rooms.map((room) => (
+                        <div key={room._id} style={{ marginBottom: '10px' }}>
+                            <h3>{room.name}</h3>
+                            <p>Topic: {room.topic}</p>
+                            <p>Participants: {room.members ? room.members.length : 0}</p>
+                            <button onClick={() => handleJoinRoom(room._id)}>
+                                Join Room
+                            </button>
+                        </div>
+                    ))
+                )}
+            </div>
+        </div>
+    );
 };
 
 export default JoinRoom;
