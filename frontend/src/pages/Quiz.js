@@ -87,7 +87,7 @@ const Quiz = () => {
                     <label>Number of Questions:</label>
                     <br />
                     <input type="number" value={numQuestions} onChange={handleNumQuestionsChange} min="1" max="20" />
-                    <br />
+                    <br /><br />
                     <button onClick={fetchQuizData} disabled={loading}>
                         {loading ? 'Loading...' : 'Start Quiz'}
                     </button>
