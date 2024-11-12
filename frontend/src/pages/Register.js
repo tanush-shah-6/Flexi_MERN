@@ -15,7 +15,7 @@ const Register = () => {
             setSuccessMessage("Registration successful! Redirecting to login..."); // Set success message
             setTimeout(() => {
                 navigate('/login'); // Redirect after 2 seconds
-            }, 2000);
+            }, 0);
         } catch (error) {
             alert("Registration failed");
         }
