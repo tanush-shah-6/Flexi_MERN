@@ -1,60 +1,52 @@
-/* src/components/Home.css */
-.hero-section {
-    text-align: center;
-    padding: 2rem;
-    background: linear-gradient(145deg, #000000, #000000);
-
-    background-image: url('/public/images/bg_hero.jpg');
-  background-size: cover;
-  background-position: center;
-  height: 90vh;
+.hero {
+  display: flex;
+  align-items: center;
+  background: url('/public/images/bg_hero.jpg') center/cover;
+  height: 100vh;
+  color: white;
+  position: relative;
+  text-align: center;
+  background-blend-mode: overlay;
+  background-color: rgba(33, 10, 108, 0.71);
 }
 
-.hero-section h1 {
-    font-size: 2.5rem;
-    color: #1100fffb;
+.hero-content {
+  margin-left: 100px;
+  max-width: 600px;
+  padding: 20px;
 }
 
-.hero-section p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 1.5rem;
+.hero-content h1 {
+  font-size: 3.5em;
+  font-weight: bold;
+  color: rgb(253, 255, 197);
 }
 
-.question-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
+.hero-content h2,span {
+  margin: 20px;
 }
 
-.question-box textarea {
-    width: 80%;
-    height: 100px;
-    padding: 0.75rem;
-    border: 1px dashed #ddd;
-    border-radius: 8px;
+
+.cta-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: none;
+  border-radius: 5px;
+  background-color: #ff5a5a;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 15px;
 }
 
-.get-answer {
-    margin-top: 1rem;
-    padding: 0.75rem 2rem;
-    color: #fff;
-    background: #0256ffd3;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 0.8em !important;
+.cta-button:hover {
+  background-color: #ff3333;
 }
 
-.trusted-info {
-    font-size: 1.5rem !important;
-    color: #888;
-    margin-top: 1.5rem;
+.hero-info {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  font-size: 0.9em;
 }
 
-@media (max-width: 768px) {
-    .question-box textarea {
-        width: 90%;
-    }
-}
