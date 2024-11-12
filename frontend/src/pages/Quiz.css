@@ -32,7 +32,7 @@ button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #2e9cca; /* Matches flashcard button color */
+    background-color: #2e9cca; 
     color: white;
     font-size: 16px;
     transition: background-color 0.3s;
@@ -45,7 +45,7 @@ button:disabled {
 }
 
 .error {
-    color: #f44336; /* Same red for errors */
+    color: #f44336 !important; 
     margin-top: 10px;
 }
 
@@ -62,7 +62,7 @@ button:disabled {
 }
 
 .option {
-    background-color: #f3f6f9 !important; /* Same blue as flashcard background */
+    background-color: #f3f6f9 !important; 
     border: 1px solid #ccc;
     padding: 15px;
     border-radius: 6px;
@@ -73,37 +73,31 @@ button:disabled {
     transition: background-color 0.3s, transform 0.2s;
 }
 
-/* Hover effect for options */
 .option:hover {
     transform: scale(1.05);
 }
 
-/* Correct answer style with vibrant green */
 .correct {
-    background-color: #28a745;
+    background-color: #28a745 !important;
     color: white;
-    border-color: #1e7e34;
+    border-color: #1e7e34 !important;
     font-weight: bold;
     transform: scale(1.05);
 }
 
-/* Wrong answer style with vibrant red */
 .wrong {
-    background-color: #f44336;
+    background-color: #f44336 !important;
     color: white;
-    border-color: #d32f2f;
+    border-color: #d32f2f !important;
     font-weight: bold;
     transform: scale(1.05);
 }
 
-/* Neutral style for other options */
 .option:not(.correct):not(.wrong) {
-    background-color: #2e9cca;
     border-color: #ccc;
     color: #ffffff;
 }
 
-/* Disable options that have been selected */
 .disabled {
     background-color: #464866;
     color: #cccccc;
@@ -111,26 +105,23 @@ button:disabled {
     transform: scale(1);
 }
 
-/* Focused option for keyboard navigation */
 .option:focus {
     outline: 2px solid #2e9cca;
 }
 
-/* Next button styling */
 .next-btn {
     margin-top: 15px;
-    background-color: #ffa500; /* Bright orange for next */
+    background-color: #ffa500 !important; 
     color: white;
 }
 
 .next-btn:hover {
-    background-color: #ff8c00;
+    background-color: #ff8c00 !important;
 }
 
-/* Results section with consistent background */
 .quiz-results {
     padding: 20px;
-    background-color: #2e9cca; /* Matches flashcard color */
+    background-color: #464866; 
     border-radius: 6px;
     font-size: 1.2em;
     color: #ffffff;
@@ -138,7 +129,7 @@ button:disabled {
 
 .restart-btn {
     margin-top: 20px;
-    background-color: #28a745; /* Green for restart */
+    background-color: #28a745; 
     color: white;
 }
 

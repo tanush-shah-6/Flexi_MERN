@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
 import './Flashcards.css';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; // Import the arrow icons
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; 
 
 const Flashcards = () => {
     const [flashcardData, setFlashcardData] = useState([]);
     const [currentCard, setCurrentCard] = useState(0);
     const [flipped, setFlipped] = useState(false);
-    const [numQuestions, setNumQuestions] = useState(5); // Default number of questions
-    const [topic, setTopic] = useState(''); // State to store topic
+    const [numQuestions, setNumQuestions] = useState(5); 
+    const [topic, setTopic] = useState(''); 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    // Handle topic input change
     const handleTopicChange = (event) => {
         setTopic(event.target.value);
     };
 
-    // Handle number of questions input change
     const handleQuestionChange = (event) => {
         setNumQuestions(event.target.value);
     };
 
-    // Function to fetch trivia data from API
     const fetchTriviaData = async () => {
         if (!topic) {
             setError('Please enter a topic to generate trivia.');
@@ -45,8 +42,8 @@ const Flashcards = () => {
             }
 
             const data = await response.json();
-            setFlashcardData(data.flashcards); // Update to use "flashcards" key
-            setCurrentCard(0); // Resetting to the first card on new data load
+            setFlashcardData(data.flashcards); 
+            setCurrentCard(0); 
         } catch (err) {
             console.error('Error fetching trivia data:', err);
             setError('Failed to load trivia data. Please try again.');
@@ -55,29 +52,26 @@ const Flashcards = () => {
         }
     };
 
-    // Handle next card navigation
     const nextCard = () => {
         setFlipped(false);
         setCurrentCard((prevCard) => (prevCard + 1) % flashcardData.length);
     };
 
-    // Handle previous card navigation
     const prevCard = () => {
         setFlipped(false);
         setCurrentCard((prevCard) => (prevCard - 1 + flashcardData.length) % flashcardData.length);
     };
 
-    // Flip the flashcard
     const flipCard = () => {
         setFlipped(!flipped);
     };
 
     return (
         <div className="flashcards">
-            {/* Topic Input */}
+            <h2>Flashcard Generator</h2>
             <div className="controls">
                 <label htmlFor="topic">Enter Topic:</label>
-                <br />
+                <br /><br />
                 <input
                     type="text"
                     id="topic"
@@ -88,10 +82,9 @@ const Flashcards = () => {
                 />
             </div>
 
-            {/* Number of Questions Input */}
             <div className="controls">
                 <label htmlFor="numQuestions">Number of questions:</label>
-                <br />
+                <br /><br />
                 <input
                     type="number"
                     id="numQuestions"
@@ -103,7 +96,6 @@ const Flashcards = () => {
                 />
             </div>
 
-            {/* Generate Button */}
             <div className="controls">
                 <button
                     onClick={fetchTriviaData}
@@ -114,7 +106,6 @@ const Flashcards = () => {
                 <p>{error}</p>
             </div>
 
-            {/* Display Flashcards if Trivia Data is Available */}
             {flashcardData.length > 0 ? (
                 <div className='box'>
                     <div className={`flashcard ${flipped ? 'flipped' : ''}`} onClick={flipCard}>
