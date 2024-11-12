@@ -1,24 +1,31 @@
-/* Header styles */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    background: black
+    background: black;
 }
 
 .logo {
     width: 15%;
-    /* height: 40%; */
 }
 
 .nav a {
     margin: 0 1rem;
     text-decoration: none;
-    color: white
+    color: white;
+    padding: 0.5rem 0.75rem;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Login and Signup link styling */
+
+.nav a:hover {
+    background-color: white; 
+    color: black; 
+}
+
+
 .auth-links {
     display: flex;
     gap: 1rem;
@@ -27,7 +34,6 @@
 .login-link,
 .signup-link,
 .logout-link {
-    /* color: #ffffff; */
     text-decoration: none;
     padding: 0.4rem 0.9rem;
     border-radius: 5px;
@@ -35,34 +41,38 @@
 }
 
 .login-link:hover {
-    background-color: #133C55;
+    background-color: #00d0ff;
+    color: black;
 }
 
 .login-link {
-    background-color: #386FA4;
+    background-color: #002b52;
     color: white;
     margin-right: 10px;
 }
 
 .logout-link {
-    background-color: red;
+    background-color: rgb(95, 1, 1);
     color: white;
     margin-right: 10px;
 }
-.logout-link:hover {
-    background-color: darkred;
-}
 
-.signup-link {
-    background-color: #28a745;
+.logout-link:hover {
+    background-color: rgb(255, 31, 31);
     color: white;
 }
 
 .signup-link:hover {
-    background-color: #19722c;
+    background-color: #00ff3c;
+    color: black;
 }
 
-.auth-buttons{
+.signup-link {
+    background-color: #19722c;
+    color: white;
+}
+
+.auth-buttons {
     margin: 10px;
     margin-right: 10px;
 }

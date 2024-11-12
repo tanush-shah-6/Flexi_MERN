@@ -82,9 +82,12 @@ const Quiz = () => {
             {!quizData.length && (
                 <div className="quiz-settings">
                     <label>Topic:</label>
+                    <br />
                     <input type="text" value={topic} onChange={handleTopicChange} placeholder="e.g., Data Science" />
                     <label>Number of Questions:</label>
+                    <br />
                     <input type="number" value={numQuestions} onChange={handleNumQuestionsChange} min="1" max="20" />
+                    <br />
                     <button onClick={fetchQuizData} disabled={loading}>
                         {loading ? 'Loading...' : 'Start Quiz'}
                     </button>

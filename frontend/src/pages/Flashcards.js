@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Flashcards.css';
-import 'font-awesome/css/font-awesome.min.css';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; // Import the arrow icons
 
 const Flashcards = () => {
     const [flashcardData, setFlashcardData] = useState([]);
@@ -77,6 +77,7 @@ const Flashcards = () => {
             {/* Topic Input */}
             <div className="controls">
                 <label htmlFor="topic">Enter Topic:</label>
+                <br />
                 <input
                     type="text"
                     id="topic"
@@ -90,6 +91,7 @@ const Flashcards = () => {
             {/* Number of Questions Input */}
             <div className="controls">
                 <label htmlFor="numQuestions">Number of questions:</label>
+                <br />
                 <input
                     type="number"
                     id="numQuestions"
@@ -114,7 +116,7 @@ const Flashcards = () => {
 
             {/* Display Flashcards if Trivia Data is Available */}
             {flashcardData.length > 0 ? (
-                <div>
+                <div className='box'>
                     <div className={`flashcard ${flipped ? 'flipped' : ''}`} onClick={flipCard}>
                         <div className="flashcard-front">
                             <p className="flashcard-text">{flashcardData[currentCard].question}</p>
@@ -130,7 +132,7 @@ const Flashcards = () => {
                             onClick={prevCard}
                             title="Previous"
                         >
-                            <i className="fas fa-arrow-left"></i>
+                            <FaArrowLeft />
                         </button>
                         <span className="progress">
                             Card {currentCard + 1} of {flashcardData.length}
@@ -140,7 +142,7 @@ const Flashcards = () => {
                             onClick={nextCard}
                             title="Next"
                         >
-                            <i className="fas fa-arrow-right"></i>
+                            <FaArrowRight />
                         </button>
                     </div>
                 </div>
