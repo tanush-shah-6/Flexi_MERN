@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header/Header';
@@ -11,6 +10,7 @@ import Register from './pages/Register';
 import Subjects from './pages/Subjects';
 import StudyRoom from './pages/StudyRoom';
 import 'font-awesome/css/font-awesome.min.css';
+import './App.css';
 
 const App = () => {
     // State to hold the authentication status

@@ -1,10 +1,8 @@
 import React from 'react';
 import './Features.css';
-import Carousel from 'react-multi-carousel'; // carousel package for responsive design
+import Carousel from 'react-multi-carousel'; 
 import 'react-multi-carousel/lib/styles.css';
-// import GPTIcon from './public/images/GPTIcon.png'; // add your image paths here
-// import ClaudeIcon from './images/ClaudeIcon.png';
-// import GeminiIcon from '/images/GeminiIcon.png';
+
 
 const FeatureSection = () => {
   const carouselItems = [
@@ -32,23 +30,23 @@ const FeatureSection = () => {
         </Carousel>
       </div>
       <div className="feature-details">
-        <h2>Boost Your Learning with StudyBuddy AI</h2>
-        <p>Achieve academic excellence with StudyBuddy, your all-in-one AI learning companion.</p>
+        <h2>Boost Your Learning with StudySpark AI</h2>
+        <p>Achieve academic excellence with StudySpark, your all-in-one AI learning companion.</p>
         <ul>
           <li>
-            <h3>All AI Models</h3>
-            <p>Access models like GPT-40, Claude 3, and Gemini 1.5 for comprehensive support.</p>
+            <h3>AI Models</h3>
+            <p>Access models like ChatGPT and Gemini for comprehensive support.</p>
           </li>
           <li>
-            <h3>Step-by-Step Solutions</h3>
-            <p>Detailed explanations to help you understand complex problems.</p>
+            <h3>Study Tools</h3>
+            <p>Generate Flashcards or Quizzes on a desired topic to aid you further in your learning journey.</p>
           </li>
           <li>
             <h3>Collaborative Learning</h3>
-            <p>Connect with a community of learners and share verified answers.</p>
+            <p>Create or Join Study Rooms and Chat with other learners!</p>
           </li>
           <li>
-            <h3>24/7 AI Tutor</h3>
+            <h3>24/7 AI ChatBot</h3>
             <p>Round-the-clock AI assistance for your study needs.</p>
           </li>
         </ul>

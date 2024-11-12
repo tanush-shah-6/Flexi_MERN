@@ -2,26 +2,27 @@
     max-width: 600px;
     margin: 0 auto;
     text-align: center;
-    font-family: Arial, sans-serif;
-    background-color: #f7f9fc;
+    font-family: 'Roboto Slab', sans-serif;
+    background-color: #464866;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: white;
 }
 
 .quiz-settings label {
     display: block;
     margin: 10px 0 5px;
     font-weight: bold;
-    color: #333;
+    color: #ffffff;
 }
 
 .quiz-settings input[type="text"],
 .quiz-settings input[type="number"] {
-    width: 100%;
+    width: 70%;
     padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
+    border-radius: 5px;
+    border: 1px solid #ccc;
     margin-bottom: 10px;
     font-size: 16px;
 }
@@ -31,10 +32,11 @@ button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #2e9cca; /* Matches flashcard button color */
     color: white;
     font-size: 16px;
     transition: background-color 0.3s;
+    font-family: 'Roboto Slab', sans-serif;
 }
 
 button:disabled {
@@ -43,13 +45,13 @@ button:disabled {
 }
 
 .error {
-    color: red;
+    color: #f44336; /* Same red for errors */
     margin-top: 10px;
 }
 
 .quiz-question h3 {
     font-size: 1.4em;
-    color: #444;
+    color: #ffffff;
 }
 
 .quiz-options {
@@ -60,28 +62,27 @@ button:disabled {
 }
 
 .option {
-    background-color: #f3f6f9;
+    background-color: #f3f6f9 !important; /* Same blue as flashcard background */
     border: 1px solid #ccc;
     padding: 15px;
     border-radius: 6px;
     text-align: left;
     font-size: 16px;
-    color: #444;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: black !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     transition: background-color 0.3s, transform 0.2s;
 }
 
 /* Hover effect for options */
 .option:hover {
-    background-color: #e1e8f0;
     transform: scale(1.05);
 }
 
 /* Correct answer style with vibrant green */
 .correct {
-    background-color: #4caf50;
+    background-color: #28a745;
     color: white;
-    border-color: #388e3c;
+    border-color: #1e7e34;
     font-weight: bold;
     transform: scale(1.05);
 }
@@ -97,28 +98,28 @@ button:disabled {
 
 /* Neutral style for other options */
 .option:not(.correct):not(.wrong) {
-    background-color: #f7f7f7;
-    border-color: #ddd;
-    color: #555;
+    background-color: #2e9cca;
+    border-color: #ccc;
+    color: #ffffff;
 }
 
 /* Disable options that have been selected */
 .disabled {
-    background-color: #e0e0e0;
-    color: #888;
+    background-color: #464866;
+    color: #cccccc;
     cursor: not-allowed;
     transform: scale(1);
 }
 
 /* Focused option for keyboard navigation */
 .option:focus {
-    outline: 2px solid #007bff;
+    outline: 2px solid #2e9cca;
 }
 
 /* Next button styling */
 .next-btn {
     margin-top: 15px;
-    background-color: #ffa500; /* Bright orange */
+    background-color: #ffa500; /* Bright orange for next */
     color: white;
 }
 
@@ -126,13 +127,13 @@ button:disabled {
     background-color: #ff8c00;
 }
 
-/* Results section with calming blue background */
+/* Results section with consistent background */
 .quiz-results {
     padding: 20px;
-    background-color: #d0e7f9;
+    background-color: #2e9cca; /* Matches flashcard color */
     border-radius: 6px;
     font-size: 1.2em;
-    color: #333;
+    color: #ffffff;
 }
 
 .restart-btn {

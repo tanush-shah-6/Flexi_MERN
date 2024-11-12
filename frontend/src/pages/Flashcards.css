@@ -1,28 +1,41 @@
-/* Container for the entire flashcard component */
 .flashcards {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     text-align: center;
-    font-family: 'Roboto', sans-serif;
     padding: 20px;
+    background-color: #464866;
+    border-radius: 20px;
+    color: white;
 }
 
-/* Main flashcard wrapper with perspective for 3D effect */
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 400px; /* Adjust as necessary */
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+}
+
 .flashcard {
-    width: 100%;
+    width: 70%;
+    max-width: 400px; 
     height: 300px;
     perspective: 1200px;
     cursor: pointer;
-    margin: 20px 0;
+    margin-bottom: 20px; /* Space between flashcard and buttons */
     position: relative;
 }
+
 .controls {
     margin-bottom: 20px;
 }
 
 input[type="text"],
 input[type="number"] {
-    width: 100%;
+    width: 70%;
     padding: 10px;
     margin-top: 10px;
     font-size: 14px;
@@ -30,14 +43,15 @@ input[type="number"] {
     border-radius: 5px;
 }
 
-button {
+.controls  button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #4CAF50;
+    background-color: #2e9cca; 
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-family: 'Roboto Slab', sans-serif; 
 }
 
 button:disabled {
@@ -45,9 +59,8 @@ button:disabled {
     cursor: not-allowed;
 }
 
-/* Front and Back side of the flashcard */
 .flashcard-front, .flashcard-back {
-    width: 100%;
+    width: 85%;
     height: 100%;
     position: absolute;
     backface-visibility: hidden;
@@ -63,18 +76,15 @@ button:disabled {
     box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for the front of the card */
 .flashcard-front {
-    background-color: #007bff;
+    background-color: #2e9cca;
 }
 
-/* Styling for the back of the card */
 .flashcard-back {
     background-color: #28a745;
     transform: rotateY(180deg);
 }
 
-/* When the card is flipped, adjust the transformation */
 .flashcard.flipped .flashcard-front {
     transform: rotateY(180deg);
 }
@@ -83,27 +93,25 @@ button:disabled {
     transform: rotateY(0);
 }
 
-/* Tip text for clicking */
 .flip-tip {
     margin-top: 10px;
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: normal;
     opacity: 0.9;
-    font-style: italic;
+    padding: 25px;
 }
 
-/* Controls for previous and next buttons */
 .flashcard-controls {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 20px;
     margin-top: 20px;
+    width: 100%;
 }
 
-/* Styling for the navigation buttons */
 .control-button {
-    background-color: #007bff;
+    background-color: #2e9cca;
     color: white;
     border: none;
     border-radius: 50%;
@@ -113,48 +121,17 @@ button:disabled {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Hover effect for the buttons */
 .control-button:hover {
     background-color: #0056b3;
+    transform: scale(1.1); 
 }
 
-/* Progress bar display */
 .progress {
     font-size: 1rem;
-    color: #007bff;
+    color: #2e9cca;
     font-weight: bold;
-}
-
-/* Arrow icons for the control buttons */
-.control-button i {
-    font-size: 1.5rem;
-}
-
-/* Left arrow button (rotate icon if needed) */
-.control-button-left {
-    transform: rotate(180deg);
-}
-
-/* Styling for the "Previous" and "Next" buttons in the controls */
-.control-button-left,
-.control-button-right {
-    background-color: #28a745; /* Optional: Change the color for better distinction */
-}
-
-.control-button-left:hover,
-.control-button-right:hover {
-    background-color: #218838;
-}
-
-/* Styling for "Click to flip" text */
-.flip-tip {
-    margin-top: 20px;
-    font-size: 1rem;
-    font-weight: normal;
-    opacity: 0.8;
-    font-style: italic;
 }
