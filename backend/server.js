@@ -7,6 +7,8 @@ const http = require('http');
 const { Server } = require('socket.io');
 const User = require('./models/User');
 const StudyRoom = require('./models/StudyRoom');
+const Flashcard = require('./models/Flashcard');
+const QuizQuestion = require('./models/Quiz');
 const studyRoomSocket = require('./sockets/studyRoomSocket');
 const studyRoomRoutes = require('./routes/studyRoomRoutes');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
@@ -60,7 +62,19 @@ async function generateFlashcardQuestions(topic, numQuestions) {
     try {
         const result = await model.generateContent(prompt);
         const sanitizedResponse = sanitizeJsonString(await result.response.text());
-        return JSON.parse(sanitizedResponse);
+        const flashcardData = JSON.parse(sanitizedResponse);
+
+        // Save each flashcard to the database
+        const flashcards = await Promise.all(flashcardData.map(async (card) => {
+            const newFlashcard = new Flashcard({
+                topic,
+                question: card.question,
+                answer: card.answer,
+            });
+            return newFlashcard.save();
+        }));
+
+        return flashcards; // Return saved flashcards from DB
     } catch (error) {
         console.error("Error generating flashcards with Google Generative AI:", error);
         throw error;
@@ -79,7 +93,20 @@ async function generateQuizQuestions(topic, numQuestions) {
     try {
         const result = await model.generateContent(prompt);
         const sanitizedResponse = sanitizeJsonString(await result.response.text());
-        return JSON.parse(sanitizedResponse);
+        const quizData = JSON.parse(sanitizedResponse);
+
+        // Save each quiz question to the database
+        const quizQuestions = await Promise.all(quizData.map(async (question) => {
+            const newQuizQuestion = new QuizQuestion({
+                topic,
+                question: question.question,
+                options: question.options,
+                answer: question.answer,
+            });
+            return newQuizQuestion.save();
+        }));
+
+        return quizQuestions; // Return saved quiz questions from DB
     } catch (error) {
         console.error("Error generating quiz with Google Generative AI:", error);
         throw error;
