@@ -14,13 +14,12 @@ const ChatRoom = () => {
   const [newMessage, setNewMessage] = useState('');
 
   useEffect(() => {
-    // Fetch previous messages
     const fetchMessages = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/studyrooms/${roomId}/messages`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         });
-        setMessages(response.data); // Set fetched messages with sender info
+        setMessages(response.data);
       } catch (error) {
         console.error('Error fetching messages:', error);
       }
@@ -28,10 +27,8 @@ const ChatRoom = () => {
 
     fetchMessages();
 
-    // Join the chat room
     socket.emit('joinRoom', { roomId });
 
-    // Listen for incoming messages
     socket.on('newMessage', (message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
@@ -49,7 +46,6 @@ const ChatRoom = () => {
       };
 
       try {
-        // Send the message to the server
         await axios.post(
           `http://localhost:5000/api/studyrooms/${roomId}/sendMessage`,
           message,
@@ -58,7 +54,6 @@ const ChatRoom = () => {
           }
         );
 
-        // Clear the input field
         setNewMessage('');
       } catch (error) {
         console.error('Error sending message:', error);

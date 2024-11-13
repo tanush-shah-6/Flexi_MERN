@@ -1,8 +1,7 @@
-// src/components/StudyRoom/StudyRoomChat.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
-import './StudyRoomChat.css';  // Import new CSS file for styling
+import './StudyRoomChat.css';  
 
 const socket = socketIOClient('http://localhost:5000');
 

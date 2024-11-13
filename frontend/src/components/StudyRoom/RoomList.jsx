@@ -1,4 +1,3 @@
-// src/components/StudyRoom/RoomList.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,7 +6,7 @@ import './RoomList.css';
 const RoomList = () => {
   const [joinedRooms, setJoinedRooms] = useState([]);
   const navigate = useNavigate();
-  const token = localStorage.getItem('token'); // Get the user token
+  const token = localStorage.getItem('token'); 
 
   useEffect(() => {
     const fetchJoinedRooms = async () => {

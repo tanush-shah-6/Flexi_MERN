@@ -31,15 +31,13 @@ const CreateRoom = () => {
       );
 
       setSuccessMessage("Room created successfully! Redirecting...");
-      
-      // Clear the input fields
+
       setRoomName('');
       setTopic('');
 
-      // Redirect to the RoomList after a short delay
       setTimeout(() => {
-        navigate('/room-list');  // Replace '/room-list' with the correct route
-      }, 1500); // 1.5 seconds delay
+        navigate('/room-list');  
+      }, 1500); 
 
     } catch (err) {
       console.error('Error creating room:', err);
@@ -76,7 +74,6 @@ const CreateRoom = () => {
 
         <button type="submit">Create Room</button>
 
-        {/* Display success message */}
         {successMessage && <p className="success-message">{successMessage}</p>}
       </form>
     </div>
