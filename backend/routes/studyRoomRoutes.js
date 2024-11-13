@@ -159,5 +159,51 @@ module.exports = (io) => {
         }
     });
 
+    router.patch('/:roomId/edit-topic', authenticate, async (req, res) => {
+        const { roomId } = req.params;
+        const { topic } = req.body;
+
+        try {
+            const room = await StudyRoom.findById(roomId);
+            if (!room) return res.status(404).json({ error: 'Room not found' });
+
+            // Only allow the creator to edit the topic
+            if (room.createdBy.toString() !== req.user._id.toString()) {
+                return res.status(403).json({ error: 'Unauthorized' });
+            }
+
+            room.topic = topic;
+            await room.save();
+            io.emit('topicUpdated', { roomId, topic });
+            res.status(200).json({ message: 'Room topic updated successfully', room });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Error updating room topic' });
+        }
+    });
+
+    // Route to delete a study room
+    router.delete('/:roomId', authenticate, async (req, res) => {
+        const { roomId } = req.params;
+
+        try {
+            const room = await StudyRoom.findById(roomId);
+            if (!room) return res.status(404).json({ error: 'Room not found' });
+
+            // Only allow the creator to delete the room
+            if (room.createdBy.toString() !== req.user._id.toString()) {
+                return res.status(403).json({ error: 'Unauthorized' });
+            }
+
+            await StudyRoom.findByIdAndDelete(roomId);
+            io.emit('roomDeleted', { roomId });
+            res.status(200).json({ message: 'Room deleted successfully' });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Error deleting room' });
+        }
+    });
+
+
     return router;
 };
