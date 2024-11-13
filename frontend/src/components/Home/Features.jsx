@@ -6,9 +6,9 @@ import 'react-multi-carousel/lib/styles.css';
 
 const FeatureSection = () => {
   const carouselItems = [
-    { id: 1, src: `${process.env.PUBLIC_URL}/images/GPTIcon.png`, label: 'GPT-40' },
-    { id: 2, src: `${process.env.PUBLIC_URL}/images/ClaudeIcon.png`, label: 'Claude 3 Opus' },
-    { id: 3, src: `${process.env.PUBLIC_URL}/images/GeminiIcon.png`, label: 'Gemini 1.5 Pro' },
+    { id: 1, src: `${process.env.PUBLIC_URL}/images/quiz.png`, label: 'Quizzes' },
+    { id: 2, src: `${process.env.PUBLIC_URL}/images/flashcards.png`, label: 'Flashcards' },
+    { id: 3, src: `${process.env.PUBLIC_URL}/images/createroom.png`, label: 'Study Rooms' },
   ];
 
   const responsive = {
