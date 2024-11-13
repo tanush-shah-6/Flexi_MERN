@@ -14,16 +14,14 @@ import ChatRoom from './components/StudyRoom/ChatRoom';
 import './App.css';
 
 const App = () => {
-    // State to hold the authentication status
+
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-    // Check authentication on initial load and whenever the token changes
     useEffect(() => {
         const token = localStorage.getItem('token');
-        setIsAuthenticated(!!token); // If there's a token, set authenticated to true
-    }, []); // This effect runs once on initial load
+        setIsAuthenticated(!!token); 
+    }, []); 
 
-    // Handle dynamic changes in authentication (like login/logout)
     const handleLogin = () => setIsAuthenticated(true);
     const handleLogout = () => setIsAuthenticated(false);
 
