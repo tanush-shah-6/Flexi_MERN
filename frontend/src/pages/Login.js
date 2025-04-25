@@ -3,30 +3,33 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Auth.css';
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState(''); // State to store error message
-    const [loading, setLoading] = useState(false); // State to manage loading state
-    const [success, setSuccess] = useState(false); // Success message state
+    const [error, setError] = useState(''); 
+    const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false); 
     const navigate = useNavigate();
 
     const handleLogin = async () => {
-        setLoading(true); // Start loading
-        setError(''); // Clear any previous errors
+        setLoading(true); 
+        setError(''); 
 
         try {
             const response = await axios.post('http://localhost:5000/login', { username, password });
             localStorage.setItem('token', response.data.token);
-            setSuccess(true); // Show success message
+            setSuccess(true);
+            
+            // Update authentication state in the parent component
+            setIsAuthenticated(true);
 
             setTimeout(() => {
-                navigate('/studyrooms'); // Redirect to study rooms page after 1 second
-            }, 1000); // 1-second delay to show the success message
+                navigate('/'); // Redirect to home page after login
+            }, 1000); 
         } catch (error) {
-            setError('Login failed, please check your credentials'); // Show error message
+            setError('Login failed, please check your credentials'); 
         } finally {
-            setLoading(false); // End loading
+            setLoading(false); 
         }
     };
 
@@ -49,8 +52,8 @@ const Login = () => {
                 <button onClick={handleLogin} disabled={loading}>
                     {loading ? 'Logging in...' : 'Login'}
                 </button>
-                {success && <p className="success-message">Login successful!</p>} {/* Success message */}
-                {error && <p className="error-message">{error}</p>} {/* Error message */}
+                {success && <p className="success-message">Login successful!</p>} 
+                {error && <p className="error-message">{error}</p>}
             </div>
         </div>
     );

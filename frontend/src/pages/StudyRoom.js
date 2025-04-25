@@ -11,8 +11,7 @@ const StudyRoom = () => {
     const [activeTab, setActiveTab] = useState("room-list");
     const navigate = useNavigate();
 
-    // Predefined Room ID
-    const predefinedRoomId = "12345"; // Replace with actual room ID
+    const predefinedRoomId = "12345"; 
 
     const handleJoinRoom = () => {
         navigate(`/study-room-chat/${predefinedRoomId}`);
@@ -25,7 +24,6 @@ const StudyRoom = () => {
                 <button onClick={() => setActiveTab("room-list")}>Room List</button>
                 <button onClick={() => setActiveTab("create-room")}>Create Room</button>
                 <button onClick={() => setActiveTab("join-room")}>Join Room</button>
-                {/* <button onClick={() => setActiveTab("study-room-chat")}>Study Room Chat</button> */}
             </div>
             <div className="tab-content">
                 {activeTab === "room-list" && <RoomList />}

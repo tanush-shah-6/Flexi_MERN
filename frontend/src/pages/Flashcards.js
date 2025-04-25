@@ -1,144 +1,230 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Flashcards.css';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'; 
+import { FaArrowLeft, FaArrowRight, FaSync, FaLightbulb } from 'react-icons/fa';
 
 const Flashcards = () => {
     const [flashcardData, setFlashcardData] = useState([]);
     const [currentCard, setCurrentCard] = useState(0);
     const [flipped, setFlipped] = useState(false);
-    const [numQuestions, setNumQuestions] = useState(5); 
-    const [topic, setTopic] = useState(''); 
+    const [numQuestions, setNumQuestions] = useState(5);
+    const [topic, setTopic] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const [isChangingCard, setIsChangingCard] = useState(false);
+    const [loadingProgress, setLoadingProgress] = useState(0);
+
+    // Reset flipped state when changing cards
+    useEffect(() => {
+        setFlipped(false);
+    }, [currentCard]);
 
     const handleTopicChange = (event) => {
         setTopic(event.target.value);
     };
 
     const handleQuestionChange = (event) => {
-        setNumQuestions(event.target.value);
+        setNumQuestions(Math.min(20, Math.max(1, event.target.value)));
     };
 
     const fetchTriviaData = async () => {
         if (!topic) {
-            setError('Please enter a topic to generate trivia.');
+            setError('Please enter a topic to generate flashcards.');
             return;
         }
 
         setLoading(true);
         setError(null);
+        setLoadingProgress(0);
+
+        // Simulate progress
+        const progressInterval = setInterval(() => {
+            setLoadingProgress(prev => {
+                if (prev >= 90) {
+                    clearInterval(progressInterval);
+                    return 90;
+                }
+                return prev + 10;
+            });
+        }, 500);
 
         try {
             const response = await fetch('http://localhost:5000/api/generate-flashcard', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify({ topic, numQuestions }),
             });
+
+            clearInterval(progressInterval);
+            setLoadingProgress(100);
 
             if (!response.ok) {
                 throw new Error(`API call failed with status: ${response.status}`);
             }
 
             const data = await response.json();
-            setFlashcardData(data.flashcards); 
-            setCurrentCard(0); 
+            setFlashcardData(data.flashcards);
+            setCurrentCard(0);
+            setFlipped(false);
         } catch (err) {
-            console.error('Error fetching trivia data:', err);
-            setError('Failed to load trivia data. Please try again.');
+            console.error('Error fetching flashcard data:', err);
+            setError('Failed to load flashcards. Please try again.');
         } finally {
-            setLoading(false);
+            setTimeout(() => {
+                setLoading(false);
+                setLoadingProgress(0);
+            }, 500);
         }
     };
 
     const nextCard = () => {
-        setFlipped(false);
-        setCurrentCard((prevCard) => (prevCard + 1) % flashcardData.length);
+        if (isChangingCard) return;
+        
+        setIsChangingCard(true);
+        setTimeout(() => {
+            setFlipped(false);
+            setCurrentCard((prevCard) => (prevCard + 1) % flashcardData.length);
+            setIsChangingCard(false);
+        }, 300);
     };
 
     const prevCard = () => {
-        setFlipped(false);
-        setCurrentCard((prevCard) => (prevCard - 1 + flashcardData.length) % flashcardData.length);
+        if (isChangingCard) return;
+        
+        setIsChangingCard(true);
+        setTimeout(() => {
+            setFlipped(false);
+            setCurrentCard((prevCard) => (prevCard - 1 + flashcardData.length) % flashcardData.length);
+            setIsChangingCard(false);
+        }, 300);
     };
 
     const flipCard = () => {
-        setFlipped(!flipped);
+        if (!isChangingCard) {
+            setFlipped(!flipped);
+        }
+    };
+
+    const resetCards = () => {
+        setCurrentCard(0);
+        setFlipped(false);
     };
 
     return (
-        <div className="flashcards">
-            <h2>Flashcard Generator</h2>
-            <div className="controls">
-                <label htmlFor="topic">Enter Topic:</label>
-                <br /><br />
-                <input
-                    type="text"
-                    id="topic"
-                    value={topic}
-                    onChange={handleTopicChange}
-                    placeholder="e.g., Science, Geography"
-                    disabled={loading}
-                />
-            </div>
+        <div className="flashcards-container">
+            <h2 className="flashcards-title">Flashcard Generator</h2>
+            
+            <div className="flashcards-form">
+                <div className="form-group">
+                    <label htmlFor="topic">Topic:</label>
+                    <input
+                        type="text"
+                        id="topic"
+                        value={topic}
+                        onChange={handleTopicChange}
+                        placeholder="e.g., Quantum Physics, World History"
+                        disabled={loading}
+                        className="form-input"
+                    />
+                </div>
 
-            <div className="controls">
-                <label htmlFor="numQuestions">Number of questions:</label>
-                <br /><br />
-                <input
-                    type="number"
-                    id="numQuestions"
-                    value={numQuestions}
-                    min="1"
-                    max="20"
-                    onChange={handleQuestionChange}
-                    disabled={loading}
-                />
-            </div>
+                <div className="form-group">
+                    <label htmlFor="numQuestions">Number of cards:</label>
+                    <input
+                        type="number"
+                        id="numQuestions"
+                        value={numQuestions}
+                        min="1"
+                        max="20"
+                        onChange={handleQuestionChange}
+                        disabled={loading}
+                        className="form-input number-input"
+                    />
+                </div>
 
-            <div className="controls">
                 <button
+                    className="generate-button"
                     onClick={fetchTriviaData}
-                    disabled={loading}
+                    disabled={loading || !topic}
                 >
-                    {loading ? 'Generating...' : 'Generate Trivia'}
+                    {loading ? 'Generating...' : 'Generate Flashcards'}
                 </button>
-                <p>{error}</p>
+                
+                {loading && (
+                    <div className="progress-container">
+                        <div 
+                            className="progress-bar" 
+                            style={{ width: `${loadingProgress}%` }}
+                        ></div>
+                        <span className="progress-text">Generating your flashcards...</span>
+                    </div>
+                )}
+                
+                {error && <p className="error-message">{error}</p>}
             </div>
 
-            {flashcardData.length > 0 ? (
-                <div className='box'>
-                    <div className={`flashcard ${flipped ? 'flipped' : ''}`} onClick={flipCard}>
-                        <div className="flashcard-front">
-                            <p className="flashcard-text">{flashcardData[currentCard].question}</p>
-                        </div>
-                        <div className="flashcard-back">
-                            <p className="flashcard-text">{flashcardData[currentCard].answer}</p>
+            {flashcardData.length > 0 && (
+                <div className="flashcard-display">
+                    <div 
+                        className={`flashcard ${flipped ? 'flipped' : ''} ${isChangingCard ? 'changing' : ''}`} 
+                        onClick={flipCard}
+                    >
+                        <div className="flashcard-inner">
+                            <div className="flashcard-front">
+                                <div className="card-content">
+                                    <p className="flashcard-text">{flashcardData[currentCard].question}</p>
+                                    <div className="flip-hint">
+                                        <FaSync /> Click to reveal answer
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flashcard-back">
+                                <div className="card-content">
+                                    <p className="flashcard-text">{flashcardData[currentCard].answer}</p>
+                                    <div className="flip-hint">
+                                        <FaSync /> Click to see question
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <p className="flip-tip">Click to flip</p>
-                    <div className="flashcard-controls">
+                    
+                    <div className="flashcard-navigation">
                         <button
-                            className="control-button control-button-left"
+                            className="nav-button prev-button"
                             onClick={prevCard}
-                            title="Previous"
+                            disabled={isChangingCard}
+                            title="Previous Card"
                         >
                             <FaArrowLeft />
                         </button>
-                        <span className="progress">
-                            Card {currentCard + 1} of {flashcardData.length}
-                        </span>
+                        
+                        <div className="card-progress">
+                            <span>{currentCard + 1}</span> / {flashcardData.length}
+                        </div>
+                        
                         <button
-                            className="control-button control-button-right"
+                            className="nav-button next-button"
                             onClick={nextCard}
-                            title="Next"
+                            disabled={isChangingCard}
+                            title="Next Card"
                         >
                             <FaArrowRight />
                         </button>
                     </div>
+                    
+                    {flashcardData.length > 1 && (
+                        <button 
+                            className="reset-button" 
+                            onClick={resetCards}
+                            title="Back to First Card"
+                        >
+                            <FaLightbulb /> Start Over
+                        </button>
+                    )}
                 </div>
-            ) : (
-                <p>No trivia data available</p>
             )}
         </div>
     );
