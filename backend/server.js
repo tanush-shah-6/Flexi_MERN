@@ -257,5 +257,16 @@ studyRoomSocket(io);
 
 app.use('/api/studyrooms', studyRoomRoutes);
 
+// User profile endpoint
+app.get('/api/user/profile', authenticate, (req, res) => {
+    res.json({
+      user: {
+        id: req.user._id,
+        username: req.user.username
+      }
+    });
+  });
+  
+
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

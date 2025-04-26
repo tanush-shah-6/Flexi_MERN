@@ -76,7 +76,7 @@ const RoomList = () => {
             <h2>Your Joined Study Rooms</h2>
             {message && <p className="error-message">{message}</p>}
             {joinedRooms.length === 0 ? (
-                <p>No joined rooms available. Join a room to start collaborating!</p>
+                <p className='room-list-text'>No joined rooms available. Join a room to start collaborating!</p>
             ) : (
                 <div className="room-cards">
                     {joinedRooms.map((room) => (

@@ -1,33 +1,13 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f7fa;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
 
-h2 {
+.join-title{
   text-align: center;
   font-size: 24px;
   margin-bottom: 20px;
   color: white;
 }
 
-div {
-  width: 80%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
-
 .room-item {
-  background-color: #f9f9f9;
+  background-color: #464866;
   padding: 15px;
   margin-bottom: 15px;
   border-radius: 8px;
@@ -35,19 +15,15 @@ div {
   transition: background-color 0.3s ease;
 }
 
-.room-item:hover {
-  background-color: #f1f1f1;
-}
-
 .room-item h3 {
   font-size: 20px;
-  color: white !important;
+  color: white ;
   margin: 0 0 10px;
 }
 
 .room-item p {
-  font-size: 14px;
-  color: #777;
+  font-size: 16px;
+  color: white;
   margin: 0 0 10px;
 }
 

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const StudyRoom = require('../models/StudyRoom');
+const User = require('../models/User');
 const authenticate = require('../middleware/authenticate');
 
 module.exports = (io) => {
@@ -42,7 +43,11 @@ module.exports = (io) => {
             room.members.push(req.user._id);
             await room.save();
 
-            io.to(roomId).emit('userJoined', { userId: req.user._id, roomId });
+            io.to(roomId).emit('userJoined', { 
+                userId: req.user._id, 
+                username: req.user.username,
+                roomId 
+            });
 
             res.status(200).json(room); 
         } catch (err) {
@@ -62,7 +67,11 @@ module.exports = (io) => {
             room.members = room.members.filter(member => member.toString() !== req.user._id.toString());
             await room.save();
 
-            io.to(roomId).emit('userLeft', { userId: req.user._id, roomId });
+            io.to(roomId).emit('userLeft', { 
+                userId: req.user._id,
+                username: req.user.username, 
+                roomId 
+            });
 
             res.status(200).json({ message: 'Left room successfully' });
         } catch (err) {
@@ -111,12 +120,24 @@ module.exports = (io) => {
                 timestamp: new Date(),
             };
 
-            await StudyRoom.findByIdAndUpdate(roomId, { $push: { messages: message } });
+            // Save message to database
+            room.messages.push(message);
+            await room.save();
 
-            io.to(roomId).emit('newMessage', { ...message, roomId });
+            // Populate sender info for the response
+            const populatedMessage = {
+                ...message,
+                sender: {
+                    _id: req.user._id,
+                    username: req.user.username
+                }
+            };
 
-            const updatedRoom = await StudyRoom.findById(roomId).populate('messages.sender', 'username');
-            res.status(200).json(updatedRoom.messages);
+            // Emit to all clients in the room
+            io.to(roomId).emit('newMessage', populatedMessage);
+
+            // Return the populated message
+            res.status(200).json(populatedMessage);
         } catch (error) {
             console.error(error);
             res.status(500).json({ error: 'Error sending message' });
@@ -127,7 +148,10 @@ module.exports = (io) => {
         const { roomId } = req.params;
         try {
             const room = await StudyRoom.findById(roomId)
-                .populate('messages.sender', 'username') 
+                .populate({
+                    path: 'messages.sender',
+                    select: 'username _id'
+                })
                 .sort({ 'messages.timestamp': 1 }); 
 
             if (!room) {
@@ -183,6 +207,15 @@ module.exports = (io) => {
         }
     });
 
+    // Add a new endpoint to get user profile
+    router.get('/user/profile', authenticate, (req, res) => {
+        res.status(200).json({
+            user: {
+                id: req.user._id,
+                username: req.user.username
+            }
+        });
+    });
 
     return router;
 };

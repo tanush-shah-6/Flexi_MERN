@@ -2,13 +2,19 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #f0f8ff;
+  background-color: #464866;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .room-list h2 {
-  color: #004080;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.room-list-text{
+  color: white;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -20,7 +26,7 @@
 }
 
 .room-card {
-  background-color: #e6f2ff;
+  background-color: #464866;
   border: 1px solid #cce0ff;
   border-radius: 8px;
   padding: 20px;
@@ -28,18 +34,18 @@
 }
 
 .room-card h3 {
-  color: #003366;
+  color: white;
   font-size: 1.3em;
   margin-bottom: 10px;
 }
 
 .room-card p {
-  color: #005580;
-  margin: 5px 0;
+  color: white;
+  margin: 5px;
 }
 
 .room-card button {
-  margin-top: 10px;
+  margin: 10px;
   padding: 8px 12px;
   font-size: 0.9em;
   border: none;

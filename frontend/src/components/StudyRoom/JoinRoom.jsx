@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import './JoinRoom.css';
 
 const JoinRoom = () => {
     const [rooms, setRooms] = useState([]);
@@ -46,8 +47,8 @@ const JoinRoom = () => {
 
     return (
         <div>
-            <h2>Join a Study Room</h2>
-            <div>
+            <h2 className='join-title'>Join a Study Room</h2>
+            <div className='room-item'>
                 {rooms && rooms.length === 0 ? (
                     <p>No available rooms to join.</p>
                 ) : (

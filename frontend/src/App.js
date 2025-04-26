@@ -15,11 +15,13 @@ import './App.css';
 
 const App = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [authChecked, setAuthChecked] = useState(false);
 
     useEffect(() => {
-        // Check for token when the component mounts or when authentication state changes
+        // Check for token when the component mounts
         const token = localStorage.getItem('token');
-        setIsAuthenticated(!!token); 
+        setIsAuthenticated(!!token);
+        setAuthChecked(true); // Mark authentication check as complete
     }, []);
 
     const handleLogin = () => {
@@ -31,18 +33,23 @@ const App = () => {
         setIsAuthenticated(false);
     };
 
+    // Show loading state while checking authentication
+    if (!authChecked) {
+        return <div className="loading">Loading...</div>;
+    }
+
     return (
         <Router>
             <div className="App">
                 <Header isAuthenticated={isAuthenticated} onLogout={handleLogout} />
                 <Routes>
                     <Route path="/" element={<><Hero /><FeatureSection /></>} />
-                    <Route path="/tools" element={isAuthenticated ? <Tools /> : <Navigate to="/login" />} />
-                    <Route path="/subjects" element={isAuthenticated ? <Subjects /> : <Navigate to="/login" />} />
-                    <Route path="/studyrooms" element={isAuthenticated ? <StudyRoom /> : <Navigate to="/login" />} />
-                    <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+                    <Route path="/tools" element={isAuthenticated ? <Tools /> : <Navigate to="/login" state={{ from: '/tools' }} />} />
+                    <Route path="/subjects" element={isAuthenticated ? <Subjects /> : <Navigate to="/login" state={{ from: '/subjects' }} />} />
+                    <Route path="/studyrooms" element={isAuthenticated ? <StudyRoom /> : <Navigate to="/login" state={{ from: '/studyrooms' }} />} />
+                    <Route path="/login" element={<Login setIsAuthenticated={handleLogin} />} />
                     <Route path="/register" element={<Register />} />
-                    <Route path="/chat-room/:roomId" element={isAuthenticated ? <ChatRoom /> : <Navigate to="/login" />} />
+                    <Route path="/chat-room/:roomId" element={isAuthenticated ? <ChatRoom /> : <Navigate to="/login" state={{ from: window.location.pathname }} />} />
                 </Routes>
                 <Footer />
             </div>
