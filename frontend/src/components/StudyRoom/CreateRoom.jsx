@@ -21,7 +21,7 @@ const CreateRoom = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/studyrooms/create',
+        'http://15.206.116.96:5000/api/studyrooms/create',
         { name: roomName, topic: topic },
         {
           headers: {

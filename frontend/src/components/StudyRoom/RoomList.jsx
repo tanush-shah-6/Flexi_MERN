@@ -12,7 +12,7 @@ const RoomList = () => {
     useEffect(() => {
         const fetchJoinedRooms = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/studyrooms/joined', {
+                const response = await axios.get('http://15.206.116.96:5000/api/studyrooms/joined', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -32,7 +32,7 @@ const RoomList = () => {
     const handleEditTopic = async (roomId, newTopic) => {
         try {
             const response = await axios.patch(
-                `http://localhost:5000/api/studyrooms/${roomId}/edit-topic`,
+                `http://15.206.116.96:5000/api/studyrooms/${roomId}/edit-topic`,
                 { topic: newTopic },
                 {
                     headers: {
@@ -56,7 +56,7 @@ const RoomList = () => {
 
     const handleDeleteRoom = async (roomId) => {
         try {
-            await axios.delete(`http://localhost:5000/api/studyrooms/${roomId}`, {
+            await axios.delete(`http://15.206.116.96:5000/api/studyrooms/${roomId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

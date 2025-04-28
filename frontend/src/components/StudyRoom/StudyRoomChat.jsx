@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import socketIOClient from 'socket.io-client';
 import './StudyRoomChat.css';  
 
-const socket = socketIOClient('http://localhost:5000');
+const socket = socketIOClient('http://15.206.116.96:5000');
 
 const StudyRoomChat = () => {
   const { roomId } = useParams();
